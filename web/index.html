@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReelVault</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>ReelVault</h1>
+  <div class="status" id="status-line" aria-live="polite">Starting</div>
+</header>
+
+<main class="layout">
+  <section class="library" aria-label="Library">
+    <form id="search-form" class="searchbar" role="search">
+      <input id="q" type="search" placeholder="Search titles, captions, notes" aria-label="Search library">
+      <button type="submit">Search</button>
+      <button type="button" id="clear-search">Clear</button>
+    </form>
+    <div class="results-meta">
+      <span id="results-meta">0 reels</span>
+      <span id="collection-filter"></span>
+    </div>
+    <table class="entries">
+      <thead>
+        <tr><th>Reel</th><th>Title</th><th>Notes</th><th>Collections</th></tr>
+      </thead>
+      <tbody id="entries-body"></tbody>
+    </table>
+    <nav class="pager" aria-label="Pages">
+      <button id="prev">Prev</button>
+      <span id="page-info"></span>
+      <button id="next">Next</button>
+    </nav>
+  </section>
+
+  <aside class="panel" aria-label="Tools">
+    <h2>Collections</h2>
+    <ul id="collections" class="collections"></ul>
+
+    <h2>Import</h2>
+    <label for="import-path">Export folder or zip path</label>
+    <input id="import-path" type="text" placeholder="/path/to/export" autocomplete="off">
+    <button id="import-btn">Import</button>
+    <pre id="import-report" class="report" hidden></pre>
+
+    <h2>Snapshots</h2>
+    <label for="backup-dir">Backup target (empty folder)</label>
+    <input id="backup-dir" type="text" placeholder="/path/to/empty-folder" autocomplete="off">
+    <button id="backup-btn">Create snapshot</button>
+    <label for="restore-dir">Restore target (empty folder)</label>
+    <input id="restore-dir" type="text" placeholder="/path/to/empty-folder" autocomplete="off">
+    <label for="restore-from">Snapshot db</label>
+    <input id="restore-from" type="text" placeholder="/path/to/reelvault-...db" autocomplete="off">
+    <button id="restore-btn">Restore</button>
+
+    <h2>Local AI</h2>
+    <label class="check"><input id="ai-toggle" type="checkbox"> Enable local AI (Ollama)</label>
+    <label for="ai-model">Model</label>
+    <input id="ai-model" type="text" placeholder="qwen2.5:3b" autocomplete="off">
+    <button id="ai-save">Save AI settings</button>
+    <div id="ai-status" class="muted"></div>
+    <label for="ai-prompt">Prompt (processed locally only)</label>
+    <textarea id="ai-prompt" rows="3" placeholder="Ask about your library"></textarea>
+    <button id="ai-run">Run locally</button>
+    <pre id="ai-out" class="report" hidden></pre>
+  </aside>
+</main>
+
+<aside id="drawer" class="drawer" hidden aria-label="Reel details">
+  <button id="drawer-close" class="ghost">Close</button>
+  <h2 id="drawer-title"></h2>
+  <a id="drawer-link" target="_blank" rel="noopener noreferrer">Open on Instagram</a>
+  <p id="drawer-collections" class="muted"></p>
+  <h3>Notes</h3>
+  <ul id="notes" class="notes"></ul>
+  <label for="note-body">New note</label>
+  <textarea id="note-body" rows="3" placeholder="What this reel teaches, setup steps, caveats"></textarea>
+  <button id="note-add">Add note</button>
+</aside>
+
+<script src="app.js"></script>
+</body>
+</html>
